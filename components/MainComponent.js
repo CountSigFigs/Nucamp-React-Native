@@ -62,6 +62,7 @@ const AboutNavigator= createStackNavigator(
         }
     }
 )
+
 const ContactNavigator= createStackNavigator(
 
     { 
