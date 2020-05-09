@@ -1,25 +1,25 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Text, View, ScrollView, StyleSheet, Picker, Switch, Button, Alert } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import * as Animatable from 'react-native-animatable';
 
-class Reservation extends Component{
-    constructor(props){
+class Reservation extends Component {
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             campers: 1,
             hikeIn: false,
             date: ''
         }
     }
-    
-    static navigationOptions ={
+
+    static navigationOptions = {
         title: 'Reserve Campsite'
     }
 
-    
 
-    resetForm (){
+
+    resetForm() {
         this.setState({
             campers: 1,
             hikeIn: false,
@@ -28,26 +28,27 @@ class Reservation extends Component{
         })
     }
 
-    handleReservation (){
+    handleReservation() {
         console.log(JSON.stringify(this.state));
     }
 
-    render (){
+    render() {
 
         const createTwoButtonAlert = () =>
-    Alert.alert(
-      "Alert Title",
-      "My Alert Msg",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ],
-      { cancelable: false }
-    );
+            Alert.alert(
+                "Begin Search?",
+                "Number of Campers: " + this.state.campers + '\n' + 'Hike-in? ' + this.state.hikeIn + '\n' + 'Date: ' + this.state.date,
+                
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => this.resetForm(),
+                        style: "cancel"
+                    },
+                    { text: "OK", onPress: () => this.resetForm() }
+                ],
+                { cancelable: false }
+            );
 
 
         return (
@@ -61,7 +62,7 @@ class Reservation extends Component{
                     <Picker
                         style={styles.formItem}
                         selectedValue={this.state.campers}
-                        onValueChange={itemValue=> this.setState({campers: itemValue})}>
+                        onValueChange={itemValue => this.setState({ campers: itemValue })}>
                         <Picker.Item label='1' value='1' />
                         <Picker.Item label='2' value='2' />
                         <Picker.Item label='3' value='3' />
@@ -75,15 +76,15 @@ class Reservation extends Component{
                     <Switch
                         style={styles.formItem}
                         value={this.state.hikeIn}
-                        trackColor={{true: '#5637DD', false: null}}
-                        onValueChange={value => this.setState({hikeIn: value})}
+                        trackColor={{ true: '#5637DD', false: null }}
+                        onValueChange={value => this.setState({ hikeIn: value })}
                     >
                     </Switch>
                 </View>
                 <View style={styles.formRow}>
                     <Text style={styles.formLabel}>Date</Text>
                     <DatePicker
-                        style={{flex:2, marginRight:20}}
+                        style={{ flex: 2, marginRight: 20 }}
                         date={this.state.date}
                         format='YYYY-MM-DD'
                         mode='date'
@@ -92,33 +93,33 @@ class Reservation extends Component{
                         confirmBtnText='Confirm'
                         cancelBtnText="Cancel"
                         customStyles={{
-                            dateIcon:{
+                            dateIcon: {
                                 position: 'absolute',
                                 left: 0,
                                 top: 4,
                                 marginLeft: 0
                             },
-                            dateInput:{
+                            dateInput: {
                                 marginLeft: 36
                             }
                         }}
-                        onDateChange={date => {this.setState({date: date})}}
-                        />
+                        onDateChange={date => { this.setState({ date: date }) }}
+                    />
                 </View>
                 <View style={styles.formRow}>
-                    <Button 
+                    <Button
                         onPress={createTwoButtonAlert}
                         title='Search'
                         color='#5637DD'
                         accessibilityLabel='Tap me to search for available campsites to reserve'
                     />
                 </View>
-                
+
             </Animatable.View>
         )
     }
 }
-const styles= StyleSheet.create({
+const styles = StyleSheet.create({
     formRow: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -133,21 +134,21 @@ const styles= StyleSheet.create({
     formItem: {
         flex: 1
     },
-    modal:{
-        justifyContent:'center',
-        margin:20
+    modal: {
+        justifyContent: 'center',
+        margin: 20
     },
-    modalTitle:{
-        fontSize:24,
+    modalTitle: {
+        fontSize: 24,
         fontWeight: 'bold',
         backgroundColor: '#5637DD',
         textAlign: 'center',
-        color:'#fff',
-        marginBottom:20
+        color: '#fff',
+        marginBottom: 20
     },
-    modalText:{
-        fontSize:18,
-        margin:10
+    modalText: {
+        fontSize: 18,
+        margin: 10
     }
 })
 export default Reservation;
