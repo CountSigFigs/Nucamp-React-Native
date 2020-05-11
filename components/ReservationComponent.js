@@ -17,8 +17,6 @@ class Reservation extends Component {
         title: 'Reserve Campsite'
     }
 
-
-
     resetForm() {
         this.setState({
             campers: 1,
@@ -49,7 +47,6 @@ class Reservation extends Component {
                 ],
                 { cancelable: false }
             );
-
 
         return (
             <Animatable.View
