@@ -331,6 +331,13 @@ class Main extends Component {
         this.props.fetchPromotions();
         this.props.fetchPartners();
 
+        this.showNetInfo()
+    }
+    componentWillUnmount(){
+        this.unsubscribeNetInfo()
+    }
+
+    async showNetInfo(){
         NetInfo.fetch().then(connectionInfo => {
             (Platform.OS === 'ios') ?
                 Alert.alert('Initial Network Connectivity Type:', connectionInfo.type)
@@ -341,9 +348,6 @@ class Main extends Component {
         this.unsubscribeNetInfo = NetInfo.addEventListener(connectionInfo => {
             this.handleConnectivityChange(connectionInfo);
         })
-    }
-    componentWillUnmount(){
-        this.unsubscribeNetInfo()
     }
 
     handleConnectivityChange = connectionInfo => {
